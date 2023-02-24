@@ -1,17 +1,16 @@
-from tradingview_ta import TA_Handler, Interval, TradingView
+from tradingview_ta import TA_Handler, Interval
 import gspread
 import pandas as pd
 from datetime import *
-
-from telegram.ext import (
-    CallbackContext,
-)
-
-from telegram import Bot, Update
-
+from telegram.ext import (CallbackContext,)
+from telegram import Bot
 import credentials
 
+# cambiare nome qui dello spreadsheet
+spread_name = "alert-bot"
+
 bot_alert = Bot(credentials.token_key)
+
 
 
 def df_from_ws(ws):
@@ -26,8 +25,7 @@ def df_from_ws(ws):
 
 
 gc = gspread.service_account(filename=credentials.gcred_path)
-
-sh = gc.open("alert-bot")
+sh = gc.open(spread_name)
 
 
 # come funziona, ogni tot viene letto lo spreadsheet

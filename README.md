@@ -10,6 +10,8 @@ testato su python 3.10
   * `token_key` api key del bot telegram
   * `gcred_path` path completo al file delle credenziali google
   * `chat_id` id della chat con il bot ([link](https://docs.influxdata.com/kapacitor/v1.6/event_handlers/telegram/#get-your-telegram-chat-id))
+* Inserire in `spread_alert.py`:
+  * `spread_name` nome dello spreadsheet da cui prendere i signal
 * `python signal_alert_bot.py` esegui il bot
 * `python spread_alert.py` main di test, vengono controllati tutti i signal sullo spreadsheet e viene inviato l'alert indipendetemente dal prezzo 
 

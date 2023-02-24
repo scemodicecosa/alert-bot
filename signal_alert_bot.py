@@ -1,17 +1,10 @@
 from apscheduler.triggers.cron import CronTrigger
-
 import credentials
 from spread_alert import check_alerts_job, check_all_alerts
-
 import logging
 from tradingview_ta import TradingView
-from telegram import  Update
-
-from telegram.ext import (
-    Updater,
-    CommandHandler,
-    CallbackContext,
-)
+from telegram import Update
+from telegram.ext import (Updater, CommandHandler, CallbackContext, )
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -42,7 +35,8 @@ def main() -> None:
     """Run the bot."""
 
     # Create the Application and pass it your bot's token.
-    application = Updater(credentials.token_key)  # Application.builder().concurrent_updates(False).token(token_key).build()
+    application = Updater(
+        credentials.token_key)  # Application.builder().concurrent_updates(False).token(token_key).build()
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
 
     application.dispatcher.add_handler(CommandHandler("list", list))
@@ -50,7 +44,7 @@ def main() -> None:
 
     # daily statistics
     application.job_queue.run_custom(callback=check_alerts_job,
-                                     job_kwargs={"trigger": CronTrigger.from_crontab("* * * * *")},context=None)
+                                     job_kwargs={"trigger": CronTrigger.from_crontab("0 * * * *")}, context=None)
 
     # Run the bot until the user presses Ctrl-C
     application.start_polling()
