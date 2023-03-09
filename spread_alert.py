@@ -132,6 +132,8 @@ def check_alerts_job(context: CallbackContext):
 def check_all_alerts():
     # controlla tutti gli alert a prescindere dal timeframe
     for ws in sh.worksheets():
+        if "done" in ws.title:
+            continue
         df = df_from_ws(ws)
         df.apply(lambda x: process_alert(x, True), axis=1)
 
