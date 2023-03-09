@@ -111,6 +111,8 @@ def check_alerts_job(context: CallbackContext):
     # questa funzione viene eseguita ogni ora
     print("parte alerts job")
     for ws in sh.worksheets():
+        if "done" in ws.title:
+            continue
         # prendo dati da spredsheet e inserisco in pandas df
         df = df_from_ws(ws)
 
